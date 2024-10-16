@@ -11,9 +11,10 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'socialmediabasic.vercel.app', // Replace with your frontend URL
-  credentials: true
+  origin: '*', // Allow all origins
+  credentials: true // Set to true if using credentials (cookies, HTTP authentication, etc.)
 }));
+
 app.use(express.json());
 app.use(session({
   secret: 'your-secret-key', // Change this in production
