@@ -29,7 +29,7 @@ Clone the repository:
    ```bash
    git clone https://github.com/yourusername/social-media-frontend.git
    cd social-media-frontend
-    npm install
+   npm install
    npm run dev
    ```
 Visit http://localhost:5173 to view the application in the browser.
