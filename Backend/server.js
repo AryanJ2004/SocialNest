@@ -9,11 +9,25 @@ require('dotenv').config();
 
 const app = express();
 
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://socialmediabasic.vercel.app'
+];
+
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173','socialmediabasic.vercel.app', 
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
 app.use(express.json());
 app.use(session({
   secret: 'your-secret-key', 
@@ -32,5 +46,6 @@ app.use((req, res) => {
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
