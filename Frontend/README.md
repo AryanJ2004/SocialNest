@@ -1,8 +1,35 @@
-# React + Vite
+# Social Media App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Social Media App, built with React, that allows users to upload images, manage their profiles, and interact with an admin dashboard.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User Authentication
+- Upload images with Cloudinary
+- Admin Dashboard
+- Responsive design
+- Display user submissions
+
+## Tech Stack
+
+- **React** - JavaScript library for building user interfaces
+- **Axios** - For making API requests to the backend
+- **Tailwind CSS** - For styling the application
+
+## Installation
+
+### Prerequisites
+
+- **Node.js** and **npm** installed
+
+### Steps
+
+Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/social-media-frontend.git
+   cd social-media-frontend
+   npm install
+   npm run dev
+   ```
+Visit http://localhost:5173 to view the application in the browser.
