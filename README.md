@@ -92,4 +92,12 @@ Start the server:
 npm start
 ```
 The backend will be running on http://localhost:5000.
-   
+## Admin Dashboard
+![image](https://github.com/user-attachments/assets/2100d53b-2598-4006-85b2-3c6c78419c9f)
+
+## Admin Login
+![image](https://github.com/user-attachments/assets/8e054ced-e23d-45a3-8548-9f4d3dfd5be9)
+
+## User Dashboard
+
+![image](https://github.com/user-attachments/assets/bc13a3e2-a12d-47e4-b331-d1fe678ec5d5)
