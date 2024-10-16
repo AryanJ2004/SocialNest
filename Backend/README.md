@@ -17,7 +17,6 @@ This is the backend for the Social Media App, built with Node.js and Express, wh
 - **MongoDB** - NoSQL database for storing user and image data
 - **Mongoose** - ODM for MongoDB
 - **Cloudinary** - For image uploads
-- **Render** - For hosting the backend
 
 ## Installation
 
