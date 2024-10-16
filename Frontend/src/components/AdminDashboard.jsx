@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,51 +6,40 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [username, setUsername] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
+  
+  const backendUrl = 'https://social-media-app-o05c.onrender.com';
 
-  const fetchData = useCallback(async () => {
-    if (!isLoggedIn) return; // Stop if not logged in
-
+  // Fetch data from backend
+  const fetchData = async () => {
     try {
-      const [usersResponse, profileResponse] = await Promise.all([
-        axios.get('/api/admin/users', { withCredentials: true }),
-        axios.get('/api/admin/profile', { withCredentials: true })
-      ]);
+      const usersResponse = await axios.get(`${backendUrl}/api/admin/users`, { withCredentials: true });
+      const profileResponse = await axios.get(`${backendUrl}/api/admin/profile`, { withCredentials: true });
+
       setUsers(usersResponse.data);
       setUsername(profileResponse.data.username);
     } catch (error) {
       console.error('Error fetching data:', error);
       if (error.response && error.response.status === 401) {
-        setIsLoggedIn(false);
-        navigate('/admin/login');
+        navigate('/admin/login'); // Redirect to login if unauthorized
       }
     } finally {
       setIsLoading(false);
     }
-  }, [isLoggedIn, navigate]);
+  };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchData();
-    }
-  }, [isLoggedIn, fetchData]);
+    fetchData(); // Fetch data on component mount
+  }, []);
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/admin/logout', {}, { withCredentials: true });
-      setIsLoggedIn(false);
-      setUsers([]); // Clear users data after logout
-      setUsername(''); // Clear username after logout
-      navigate('/');
+      await axios.post(`${backendUrl}/api/admin/logout`, {}, { withCredentials: true });
+      navigate('/admin/login'); // Redirect to login after logout
     } catch (error) {
       console.error('Error logging out:', error);
     }
   };
-
-  if (!isLoggedIn) {
-    return null; // Don't render if not logged in
-  }
 
   if (isLoading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
@@ -90,12 +79,12 @@ export default function AdminDashboard() {
                     {user.images && user.images.map((image, index) => (
                       <div key={index} className="flex flex-col items-center">
                         <img
-                          src={image} // Ensure this is the correct path
+                          src={image} 
                           alt={`Uploaded by ${user.name}`}
                           className="w-full h-32 object-cover rounded"
                         />
                         <a
-                          href={image} // Link to the original image
+                          href={image}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="mt-2 text-indigo-600 hover:text-indigo-800"
@@ -105,9 +94,6 @@ export default function AdminDashboard() {
                       </div>
                     ))}
                   </div>
-                </div>
-                <div className="bg-gray-50 px-6 py-3">
-                  <p className="text-sm text-gray-500">Images stored in: {user.images}</p>
                 </div>
               </div>
             ))}

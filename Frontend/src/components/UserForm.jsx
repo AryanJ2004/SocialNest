@@ -9,6 +9,9 @@ export default function UserForm() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Set your backend URL
+  const backendUrl = 'https://social-media-app-o05c.onrender.com';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -23,7 +26,7 @@ export default function UserForm() {
     }
   
     try {
-      const response = await axios.post('/api/users', formData, {
+      const response = await axios.post(`${backendUrl}/api/users`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Submission successful!');
