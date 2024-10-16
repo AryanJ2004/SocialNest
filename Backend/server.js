@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://socialmediabasic.vercel.app/', // Allow all origins
+  origin: 'https://socialmediabasic.vercel.app', // Allow all origins
   credentials: true // Set to true if using credentials (cookies, HTTP authentication, etc.)
 }));
 
