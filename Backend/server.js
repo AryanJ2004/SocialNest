@@ -12,7 +12,6 @@ const app = express();
 // Define allowed origins
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://socialmediabasic.vercel.app'
 ];
 
 // Middleware
