@@ -5,21 +5,21 @@ const session = require('express-session');
 const userRoutes = require('./routes/users');
 const adminRoutes = require('./routes/admin');
 
-require('dotenv').config(); // For Cloudinary credentials
+require('dotenv').config();
 
 const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend URL
+  origin: 'http://localhost:5173','socialmediabasic.vercel.app', 
   credentials: true
 }));
 app.use(express.json());
 app.use(session({
-  secret: 'your-secret-key', // Change this in production
+  secret: 'your-secret-key', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Set to true if using HTTPS
+  cookie: { secure: false } 
 }));
 
 // Routes
@@ -28,7 +28,7 @@ app.use('/api/admin', adminRoutes);
 app.use((req, res) => {
   res.status(404).send('Path Not Exists');
 });
-// Connect to MongoDB
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
