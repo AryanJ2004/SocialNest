@@ -5,15 +5,11 @@ export default function AdminLogin({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const backendUrl = 'https://social-media-app-o05c.onrender.com';
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${backendUrl}/api/admin/login`, { username, password });
+      const response = await axios.post('/api/admin/login', { username, password });
       if (response.data.success) {
-        // Store the token in local storage
-        localStorage.setItem('adminToken', response.data.token); // Adjust as per your response structure
         onLogin();
       } else {
         alert('Invalid credentials');
